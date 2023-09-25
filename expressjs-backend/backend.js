@@ -57,6 +57,20 @@ app.post('/users', (req, res) => {
     res.status(200).end();
 });
 
+app.delete('/users/:id', (req, res) => {
+    const id = req.params['id'];
+    if (id === undefined)
+        res.status(404).send('Resource not found.');
+    else {
+        removeUserById(id);
+        res.status(200).end();
+    }
+});
+
+function removeUserById(id) {
+    users['users_list'] = users['users_list'].filter((user) => user.id !== id);
+}
+
 function addUser(user) {
     users['users_list'].push(user);
 }
