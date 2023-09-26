@@ -59,7 +59,7 @@ app.post('/users', (req, res) => {
 
     userToAdd = {id: id, ...userToAdd};
     addUser(userToAdd);
-    res.status(201).end();
+    res.status(201).send(userToAdd);
 });
 
 app.delete('/users/:id', (req, res) => {
