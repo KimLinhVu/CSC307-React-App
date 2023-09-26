@@ -54,7 +54,10 @@ app.get('/users/:id', (req, res) => {
 });
 
 app.post('/users', (req, res) => {
-    const userToAdd = req.body;
+    var userToAdd = req.body;
+    const id = generateRandomID();
+
+    userToAdd = {id: id, ...userToAdd};
     addUser(userToAdd);
     res.status(201).end();
 });
@@ -98,6 +101,10 @@ function findUserById(id) {
 
 function findUserByNameJob(name, job) {
     return users['users_list'].find((user) => user['name'] === name && user['job'] === job);
+}
+
+function generateRandomID() {
+    return Date.now().toString(36) + Math.random().toString(36).slice(2);
 }
 
 app.listen(port, () => {
